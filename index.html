@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Desi WhatsApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Design (CSS) */
+      body {
+        margin: 0;
+        padding-bottom: 4rem;
+        font-family: sans-serif;
+        background: #e5ddd5;
+      }
+
+      /* Login Screen Design */
+      #login-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #075e54;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+      #login-box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 80%;
+        max-width: 300px;
+      }
+      #username-input {
+        padding: 10px;
+        font-size: 16px;
+        width: 80%;
+        margin-bottom: 10px;
+      }
+      #join-btn {
+        padding: 10px 20px;
+        background: #25d366;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      /* Chat Input Area */
+      #form {
+        background: #f0f0f0;
+        padding: 0.5rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        height: 3.5rem;
+        align-items: center;
+      }
+      #input {
+        border: none;
+        padding: 0 1rem;
+        flex-grow: 1;
+        border-radius: 2rem;
+        height: 2.5rem;
+        margin: 0 0.5rem;
+      }
+      #input:focus {
+        outline: none;
+      }
+      button {
+        background: #128c7e;
+        border: none;
+        padding: 0 1rem;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        height: 2.5rem;
+        width: 2.5rem;
+      }
+
+      /* Messages Area */
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .msg-container {
+        padding: 8px 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        max-width: 70%;
+        width: fit-content;
+        word-wrap: break-word;
+      }
+
+      .my-msg {
+        background: #dcf8c6;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .other-msg {
+        background: #fff;
+        align-self: flex-start;
+      }
+      .system-msg {
+        background: rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 0.8rem;
+        color: #333;
+        align-self: center;
+        border-radius: 20px;
+        padding: 5px 10px;
+      }
+
+      .username {
+        font-weight: bold;
+        font-size: 0.75rem;
+        color: #075e54;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .msg-img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+      #typing-notify {
+        position: fixed;
+        bottom: 4rem;
+        left: 1rem;
+        color: #555;
+        font-size: 0.8rem;
+        font-style: italic;
+      }
+      #file-label {
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+      <div id="login-box">
+        <h3>App me swagat hai!</h3>
+        <input id="username-input" placeholder="Apna naam likho..." />
+        <button id="join-btn">Chat Shuru Karo</button>
+      </div>
+    </div>
+
+    <!-- Chat Screen -->
+    <ul id="messages"></ul>
+    <div id="typing-notify"></div>
+
+    <form id="form" action="">
+      <label for="file-input" id="file-label">📷</label>
+      <input
+        type="file"
+        id="file-input"
+        accept="image/*"
+        style="display: none"
+      />
+      <input id="input" autocomplete="off" placeholder="Message..." /><button>
+        ➤
+      </button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var myName = "";
+
+      // 1. Login Logic
+      document
+        .getElementById("join-btn")
+        .addEventListener("click", function () {
+          var name = document.getElementById("username-input").value;
+          if (name) {
+            myName = name;
+            socket.emit("join", name);
+            document.getElementById("login-screen").style.display = "none";
+          } else {
+            alert("Bhai naam to likho!");
+          }
+        });
+
+      var form = document.getElementById("form");
+      var input = document.getElementById("input");
+      var fileInput = document.getElementById("file-input");
+      var messages = document.getElementById("messages");
+      var typingNotify = document.getElementById("typing-notify");
+
+      // 2. Message Submit
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit("chat message", input.value);
+          input.value = "";
+        }
+      });
+
+      // 3. Typing Indicator
+      input.addEventListener("input", function () {
+        socket.emit("typing");
+      });
+
+      // 4. Photo Upload Logic
+      fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function () {
+            socket.emit("image message", reader.result);
+          };
+        }
+      });
+
+      // 5. Message Receive karna
+      socket.on("chat message", function (data) {
+        typingNotify.innerText = "";
+        var item = document.createElement("li");
+
+        if (data.user === "System") {
+          item.classList.add("msg-container", "system-msg");
+          item.textContent = data.text;
+        } else {
+          item.classList.add(
+            "msg-container",
+            data.user === myName ? "my-msg" : "other-msg"
+          );
+
+          var nameTag = document.createElement("span");
+          nameTag.classList.add("username");
+          nameTag.textContent = data.user;
+          item.appendChild(nameTag);
+
+          if (data.type === "text") {
+            var textSpan = document.createElement("span");
+            textSpan.textContent = data.text;
+            item.appendChild(textSpan);
+          } else if (data.type === "image") {
+            var img = document.createElement("img");
+            img.src = data.image;
+            img.classList.add("msg-img");
+            item.appendChild(img);
+          }
+        }
+
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      // 6. Typing Show karna
+      let typingTimer;
+      socket.on("typing", function (user) {
+        if (user !== myName) {
+          typingNotify.innerText = `${user} type kar raha hai...`;
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(() => {
+            typingNotify.innerText = "";
+          }, 1000);
+        }
+      });
+    </script>
+  </body>
+</html>

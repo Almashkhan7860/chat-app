@@ -1,4 +1,4 @@
-# 💬 Desi WhatsApp — Real-Time Chat Application Desi WhatsApp is a lightweight, secure, and super-fast real-time multi-user chat application. It's built using Node.js, Express, and Socket.io. Its interface is fully responsive and clean, similar to popular messaging platforms, and works perfectly on both mobile and desktop. --
+# 💬 Desi WhatsApp — Real-Time Chat Application Desi WhatsApp is a lightweight, secure, and super-fast real-time multi-user chat application. It's built using Node.js, Express, and Socket.io. Its interface isv fully responsive and clean, similar to popular messaging platforms, and works perfectly on both mobile and desktop. --
 
 ## ✨ Features
 
@@ -11,7 +11,8 @@
 
 --
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack:
+
 
 * **Backend:** Node.js (Express Framework)
 * **Real-Time Communication:** Socket.io (WebSockets)
@@ -23,7 +24,7 @@
 
 Follow the steps below to run this project locally on your system or in Termux:
 
-### 1. Clone the repository:
+### 1. Clone the repository
 ```bash
 git clone [https://github.com/Almashkhan7860/chat-app.git](https://github.com/Almashkhan7860/chat-app.git)
 
@@ -43,3 +44,9 @@ npm start
 ```bash
 http://localhost:3000
 
+### 📂 Project Structure:-
+```bash
+├── server.js          # Main Node.js Backend Server with Socket.io configuration
+├── index.html         # Frontend UI Layout, Tailwind-Style Desi CSS & Client Socket Logic
+├── package.json       # Project Metadata and Node module dependencies
+└── package-lock.json  # Dependency lockfile for exact versioning

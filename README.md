@@ -71,10 +71,10 @@ Start Typing → Event Sent → Server → Other Users See "Typing..."
 # 6. Project Structure
 Show and explain:
 
-├── server.js          # Main Node.js Backend Server with Socket.io configuration
-├── index.html         # Frontend UI Layout, Tailwind-Style Desi CSS & Client Socket Logic
-├── package.json       # Project Metadata and Node module dependencies
-└── package-lock.json  # Dependency lockfile for exact versioning
+- ├── server.js          # Main Node.js Backend Server with Socket.io configuration
+- ├── index.html         # Frontend UI Layout, Tailwind-Style Desi CSS & Client Socket Logic
+- ├── package.json       # Project Metadata and Node module dependencies
+- └── package-lock.json  # Dependency lockfile for exact versioning
 
 Explain the purpose of each file.
 

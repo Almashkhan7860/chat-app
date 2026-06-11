@@ -1,0 +1,1 @@
+# 💬 Desi WhatsApp — Real-Time Chat Application Desi WhatsApp is a lightweight, secure, and super-fast real-time multi-user chat application. It's built using Node.js, Express, and Socket.io. Its interface is fully responsive and clean, similar to popular messaging platforms, and works perfectly on both mobile and desktop. --

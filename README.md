@@ -27,5 +27,19 @@ Follow the steps below to run this project locally on your system or in Termux:
 ```bash
 git clone [https://github.com/Almashkhan7860/chat-app.git](https://github.com/Almashkhan7860/chat-app.git)
 
+### 2. Enter the project directory:
+```bash
+cd chat-app
 
+### 3. Install dependencies:
+```bash
+nmp install
+
+### 4. Start the server:
+```bash
+npm start
+
+### 5. Open in browser:
+```bash
+http://localhost:3000
 

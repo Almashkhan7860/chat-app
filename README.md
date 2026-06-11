@@ -11,3 +11,11 @@
 
 --
 
+## 🛠️ Tech Stack
+
+* **Backend:** Node.js (Express Framework)
+* **Real-Time Communication:** Socket.io (WebSockets)
+* **Frontend:** HTML5, CSS3 (Custom Responsive Styling), Vanilla JavaScript
+
+---
+

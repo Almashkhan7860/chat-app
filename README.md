@@ -46,10 +46,13 @@ Include complete setup for:
 - Termux
 
 Commands:
-git clone 
+### 1. Clone the repository:
+```bash
+git clone https://github.com/Almashkhan7860/chat-app.git
 cd chat-app
 npm install
 npm start
+
 
 Open:
 http://localhost:3000

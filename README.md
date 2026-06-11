@@ -39,18 +39,17 @@ Explain:
 - Mobile Responsive UI
 - Fast Socket.io Communication
 
-# 3. Tech Stack
-Frontend:
-- HTML5
-- CSS3
-- JavaScript
+## 🛠️ 3 Tech Stack
 
-Backend:
-- Node.js
-- Express.js
-- Socket.io
+* **Backend:** Node.js (Express Framework)
+* **Real-Time Communication:** Socket.io (WebSockets)
+* **Frontend:** HTML5, CSS3, Vanilla JavaScript
 
-# 4. Installation & Setup
+---
+
+## 💻 4 Installation & Setup
+
+Follow the execution sequence below. Click the **Copy** button on the top-right corner of each terminal code block to directly execute them in your terminal or Termux environment:
 Include complete setup for:
 - Windows
 - Linux

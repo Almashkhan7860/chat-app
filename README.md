@@ -50,3 +50,5 @@ http://localhost:3000
 ├── index.html         # Frontend UI Layout, Tailwind-Style Desi CSS & Client Socket Logic
 ├── package.json       # Project Metadata and Node module dependencies
 └── package-lock.json  # Dependency lockfile for exact versioning
+
+🔒 Security & Performance Features Buffer Size Control: The maximum buffer limit for media sharing in `server.js` is set to 10MB (1e7 bytes) to prevent server crashes or overloads. Auto-Reset Typing Timers: The typing indicator on the chat screen disappears automatically as soon as a user stops typing.

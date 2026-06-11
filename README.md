@@ -46,7 +46,7 @@ Include complete setup for:
 - Termux
 
 Commands:
-git clone
+git clone 
 cd chat-app
 npm install
 npm start
@@ -69,18 +69,10 @@ Start Typing → Event Sent → Server → Other Users See "Typing..."
 # 6. Project Structure
 Show and explain:
 
-chat-app/
-│
-├── server.js
-├── package.json
-├── package-lock.json
-│
-├── public/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│
-└── README.md
+├── server.js          # Main Node.js Backend Server with Socket.io configuration
+├── index.html         # Frontend UI Layout, Tailwind-Style Desi CSS & Client Socket Logic
+├── package.json       # Project Metadata and Node module dependencies
+└── package-lock.json  # Dependency lockfile for exact versioning
 
 Explain the purpose of each file.
 
